@@ -1,0 +1,27 @@
+{
+  "name": "solana-liquidity-bot-node",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "dependencies": {
+    "@coral-xyz/anchor": "0.29.0",
+    "@meteora-ag/dlmm": "1.7.3",
+    "@meteora-ag/dynamic-amm-sdk": "1.4.1",
+    "@solana/spl-token": "0.4.7",
+    "@solana/web3.js": "1.98.4",
+    "bs58": "5.0.0"
+  },
+  "overrides": {
+    "node-fetch": "2.6.12",
+    "cross-fetch": "3.1.5",
+    "bigint-buffer": "file:vendor/bigint-buffer",
+    "@solana/web3.js": "1.98.4",
+    "@meteora-ag/dynamic-amm-sdk": {
+      "@solana/web3.js": "1.98.4"
+    },
+    "@meteora-ag/dlmm": {
+      "@solana/web3.js": "1.98.4"
+    }
+  }
+}

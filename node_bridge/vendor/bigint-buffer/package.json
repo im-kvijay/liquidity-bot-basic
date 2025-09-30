@@ -1,0 +1,18 @@
+{
+  "name": "bigint-buffer",
+  "version": "1.1.5-security.0",
+  "description": "Patched bigint-buffer with pure JavaScript implementation",
+  "main": "dist/node.js",
+  "browser": {
+    "./dist/node.js": "./dist/browser.js"
+  },
+  "types": "dist/index.d.ts",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/no2chem/bigint-buffer.git"
+  },
+  "engines": {
+    "node": ">=12"
+  }
+}

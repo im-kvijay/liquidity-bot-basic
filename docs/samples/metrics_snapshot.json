@@ -1,0 +1,64 @@
+{
+  "metrics": {
+    "counters": {
+      "tokens_discovered": 42,
+      "eligible_tokens": 12,
+      "fills_processed": 128,
+      "events.fill": 128,
+      "events.reject": 5
+    },
+    "gauges": {
+      "inventory_value_usd": 18423.17,
+      "realized_pnl_usd": 512.44,
+      "unrealized_pnl_usd": 87.11,
+      "transaction_queue_depth": 2,
+      "risk_rejection_rate": 0.0417
+    },
+    "histograms": {
+      "router_latency_ms": {
+        "count": 96,
+        "avg": 41.2,
+        "p50": 28.4,
+        "p90": 67.9,
+        "p99": 102.5
+      },
+      "execution_slippage_bps": {
+        "count": 64,
+        "avg": 7.4,
+        "p50": 5.0,
+        "p90": 12.5,
+        "p99": 19.1
+      }
+    },
+    "mappings": {
+      "inventory_exposure_usd": {
+        "Mint11111111111111111111111111111111": 6123.45,
+        "Mint22222222222222222222222222222222": 4800.00,
+        "Mint33333333333333333333333333333333": 3200.12
+      }
+    }
+  },
+  "latest_pnl": {
+    "timestamp": "2024-03-02T04:15:22.194Z",
+    "realized_usd": 512.44,
+    "unrealized_usd": 87.11,
+    "fees_usd": 34.88,
+    "rebates_usd": 12.50,
+    "inventory_value_usd": 18423.17,
+    "net_exposure_usd": 12250.00,
+    "drawdown_pct": 0.06,
+    "venue_breakdown": {
+      "meteora_damm": 412.12,
+      "meteora_dlmm": 100.32
+    },
+    "pair_breakdown": {
+      "Mint11111111111111111111111111111111:meteora_damm": 250.00,
+      "Mint22222222222222222222222222222222:meteora_dlmm": 162.44
+    },
+    "strategy_breakdown": {
+      "spread_mm": 300.00,
+      "liquidity_provision": 112.44,
+      "signal_taker": 100.00
+    }
+  }
+}

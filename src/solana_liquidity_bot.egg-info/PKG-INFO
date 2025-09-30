@@ -1,0 +1,26 @@
+Metadata-Version: 2.4
+Name: solana-liquidity-bot
+Version: 0.1.0
+Summary: Framework and reference implementation of a Solana early-coin liquidity bot leveraging DAMM v2.
+Author: OpenAI Demo
+License: MIT
+Project-URL: Homepage, https://github.com/openai
+Requires-Python: >=3.11
+Requires-Dist: requests==2.31.0
+Requires-Dist: pydantic==2.6.4
+Requires-Dist: pydantic-settings==2.1.0
+Requires-Dist: python-dotenv==1.0.1
+Requires-Dist: cachetools==5.3.3
+Requires-Dist: tenacity==8.2.3
+Requires-Dist: aiohttp==3.9.3
+Requires-Dist: pandas==2.1.4
+Requires-Dist: solana==0.34.0
+Requires-Dist: construct==2.10.68
+Requires-Dist: base58==2.1.1
+Requires-Dist: fastapi==0.109.2
+Requires-Dist: uvicorn==0.27.1
+Provides-Extra: dev
+Requires-Dist: pytest==7.4.4; extra == "dev"
+Requires-Dist: pytest-asyncio==0.23.5; extra == "dev"
+Requires-Dist: black==23.12.1; extra == "dev"
+Requires-Dist: ruff==0.1.15; extra == "dev"

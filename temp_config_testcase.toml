@@ -1,0 +1,20 @@
+[default.mode]
+active = "dry_run"
+cluster = "mainnet-beta"
+
+[default.rpc]
+primary_url = "https://api.default"
+request_timeout = 9.5
+
+[default.token_universe]
+min_liquidity_usd = 15000
+
+[live.mode]
+active = "live"
+cluster = "mainnet-beta"
+
+[live.rpc]
+primary_url = "https://api.mainnet"
+
+[live.token_universe]
+min_liquidity_usd = 30000

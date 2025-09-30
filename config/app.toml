@@ -1,0 +1,229 @@
+[default]
+# Shared defaults across all environments
+
+[default.mode]
+active = "dry_run"
+cluster = "mainnet-beta"
+dry_run_seed = 0
+persist_dry_run_state = true
+
+[default.trading]
+enable_live = false            # flip to true after 2–3 green paper days
+dry_run = true                 # keep paper first
+min_edge_bps = 40              # must beat all costs + 10bps buffer for more opportunities
+
+[default.rpc]
+primary_url = "https://api.mainnet-beta.solana.com"
+fallback_urls = ["https://solana-api.projectserum.com"]
+request_timeout = 18.0
+commitment = "confirmed"
+
+[default.token_universe]
+min_liquidity_usd = 15000.0    # Lower for more opportunities
+min_volume_24h_usd = 50000.0    # Lower for more opportunities
+min_holder_count = 250
+max_holder_concentration_pct = 0.35
+max_top10_holder_pct = 0.7
+require_oracle_price = true
+deny_freeze_authority = true
+deny_mints = []
+deny_creators = []
+deny_authorities = []
+suspicious_keywords = ["rug", "honeypot", "scam", "exploit"]
+min_decimals = 0
+max_decimals = 12
+aml_min_token_age_minutes = 15
+aml_min_holder_count = 25
+aml_max_single_holder_pct = 0.75
+aml_sanctioned_accounts = []
+# Production-ready discovery thresholds
+early_min_liquidity_usd = 5000
+early_min_volume_24h_usd = 10000
+min_base_fee_bps = 200
+max_candidates = 300
+
+[default.venues.damm]
+program_id = "Eo7WjKq67rjJQSZxS6z3YkapzY3eMj6Xy8X5EQVn5UaB"
+min_liquidity_usd = 20000.0
+max_slippage_bps = 80
+
+[default.venues.dlmm]
+program_id = "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo"
+min_liquidity_usd = 25000.0
+max_slippage_bps = 90
+required_oracle_confidence_bps = 50
+
+[default.data_sources]
+damm_base_url = "https://dammv2-api.meteora.ag"
+damm_devnet_base_url = "https://dammv2-api.devnet.meteora.ag"
+damm_pool_endpoint = "/pools"
+damm_page_limit = 50
+dlmm_base_url = "https://dlmm-api.meteora.ag"
+dlmm_devnet_base_url = "https://devnet-dlmm-api.meteora.ag"
+dlmm_pool_endpoint = "/pair/all"
+dlmm_page_limit = 50
+price_oracle_url = "https://lite-api.jup.ag/"
+# Enhanced caching for reduced RPC load
+cache_ttl_seconds = 300  # 5 minutes instead of 2
+rocketscan_cache_ttl_seconds = 600  # 10 minutes instead of 3
+price_oracle_cache_ttl_seconds = 60  # 1 minute for prices
+pool_cache_ttl_seconds = 180  # 3 minutes for pool data
+
+[default.router]
+liquidity_weight = 0.45
+fee_weight = 0.2
+volatility_weight = 0.15
+slippage_safety_bps = 40
+
+[default.execution]
+queue_capacity = 128
+max_concurrency = 4
+retry_backoff_seconds = 0.75
+max_retry_attempts = 3
+jitter_seconds = 0.25
+batch_size = 4
+# Production-ready execution controls
+dedupe_requests = true
+cache_ttl_seconds = 300
+priority_fee_policy = "adaptive_percentile"
+priority_fee_percentile = 0.75
+max_priority_fee_budget_usd = 0.05
+
+[default.pnl]
+mark_price_source = "oracle"
+oracle_staleness_seconds = 45
+# Enhanced PnL tracking for dry runs
+enable_dry_run_pnl = true
+pnl_update_interval_seconds = 30
+position_level_pnl = true
+profitability_metrics = true
+# Production-ready analytics
+performance_summary_every_n_trades = 10
+
+[default.risk]
+max_global_notional_usd = 200000.0  # Increased for higher volume
+max_market_notional_usd = 35000.0   # Increased for better opportunities
+max_position_notional_usd = 15000.0 # Increased for larger positions
+max_inventory_pct = 0.35            # Higher utilization for more profits
+max_open_orders = 30                # More concurrent positions
+# Enhanced risk management for profitability
+enable_dynamic_risk_management = true
+enable_adaptive_position_sizing = true
+enable_portfolio_optimization = true
+enable_self_healing = true
+profitability_focus = true
+# Production-ready risk controls
+max_position_usd = 500              # Larger individual positions
+max_notional_usd = 2000             # Higher total exposure
+max_daily_loss_pct = 3.0            # Slightly higher loss tolerance
+max_token_exposure_pct = 30.0       # Higher token concentration
+emergency_drawdown_pct = 20.0       # Lower emergency threshold
+cool_off_seconds = 300              # Shorter cooldown for faster recovery
+
+[default.circuit_breakers]
+max_drawdown_pct = 0.2
+max_reject_rate = 0.15
+cooldown_seconds = 300
+
+[default.strategy.launch]
+require_existing_pool = true
+prefer_damm = true
+min_liquidity_usd = 8000       # Lower for more opportunities
+min_volume_1h_usd = 15000       # Lower for more opportunities
+max_slippage_bps = 40
+max_price_impact_bps = 30
+take_profit_bps = 150
+trailing_stop_bps = 75
+stop_loss_bps = 80
+dynamic_position_sizing = true
+
+[default.event_bus]
+enabled = true
+max_queue_size = 2048
+publish_metrics = true
+
+[default.dashboard]
+host = "0.0.0.0"
+port = 8080
+auth_mode = "read_only"
+metrics_refresh_interval_seconds = 5
+allowed_origins = ["http://localhost:8080", "https://yourdomain.com"]
+
+[default.storage]
+database_path = "./state.sqlite3"
+metrics_snapshot_path = "./metrics_snapshots"
+
+[default.monitoring]
+log_level = "INFO"
+enable_prometheus = true
+metrics_port = 9100
+webhook_urls = []
+alert_throttle_seconds = 60
+
+[dry_run]
+# Dry run overrides for safe testing
+
+[dry_run.mode]
+active = "dry_run"
+cluster = "mainnet-beta"
+persist_dry_run_state = true
+
+[dry_run.rpc]
+primary_url = "https://api.mainnet-beta.solana.com"
+fallback_urls = ["https://solana-api.projectserum.com"]
+commitment = "confirmed"
+
+[dry_run.token_universe]
+require_oracle_price = false
+min_liquidity_usd = 15000.0
+min_volume_24h_usd = 40000.0
+
+[dry_run.strategy]
+fixed_allocation_usd = 10.0
+
+[live]
+# Live trading overrides
+
+[live.mode]
+active = "live"
+cluster = "mainnet-beta"
+
+[live.wallet]
+allow_test_keypair = false
+
+[live.router]
+slippage_safety_bps = 30
+prefer_maker_routes = true
+
+[live.execution]
+queue_capacity = 160
+max_concurrency = 6
+retry_backoff_seconds = 1.0
+max_retry_attempts = 5
+jitter_seconds = 0.35
+batch_size = 6
+
+[live.risk]
+daily_loss_limit_usd = 10000.0  # Higher loss limit for live trading
+max_inventory_pct = 0.4         # Even higher utilization for live profits
+max_global_notional_usd = 300000.0  # Higher volume for live trading
+max_position_notional_usd = 20000.0 # Larger positions in live
+
+[testnet]
+# Optional testnet configuration for semi-live rehearsals
+
+[testnet.mode]
+active = "testnet"
+cluster = "testnet"
+
+[testnet.rpc]
+primary_url = "https://api.testnet.solana.com"
+commitment = "confirmed"
+
+[testnet.execution]
+queue_capacity = 64
+max_concurrency = 2
+retry_backoff_seconds = 0.6
+max_retry_attempts = 3
+jitter_seconds = 0.2
+batch_size = 2

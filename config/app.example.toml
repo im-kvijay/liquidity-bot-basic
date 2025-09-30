@@ -1,0 +1,174 @@
+[default]
+# Shared defaults across all environments
+
+[default.mode]
+active = "dry_run"
+cluster = "mainnet-beta"
+dry_run_seed = 0
+persist_dry_run_state = true
+
+[default.rpc]
+primary_url = "https://api.mainnet-beta.solana.com"
+fallback_urls = ["https://solana-api.projectserum.com"]
+request_timeout = 12.0
+commitment = "confirmed"
+
+[default.token_universe]
+min_liquidity_usd = 25000.0
+min_volume_24h_usd = 75000.0
+min_holder_count = 250
+max_holder_concentration_pct = 0.35
+max_top10_holder_pct = 0.7
+require_oracle_price = true
+deny_freeze_authority = true
+deny_mints = []
+deny_creators = []
+deny_authorities = []
+suspicious_keywords = ["rug", "honeypot", "scam", "exploit"]
+min_decimals = 0
+max_decimals = 12
+aml_min_token_age_minutes = 15
+aml_min_holder_count = 25
+aml_max_single_holder_pct = 0.75
+aml_sanctioned_accounts = []
+
+[default.venues.damm]
+program_id = "Eo7WjKq67rjJQSZxS6z3YkapzY3eMj6Xy8X5EQVn5UaB"
+min_liquidity_usd = 20000.0
+max_slippage_bps = 80
+
+[default.venues.dlmm]
+program_id = "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo"
+min_liquidity_usd = 25000.0
+max_slippage_bps = 90
+required_oracle_confidence_bps = 50
+
+[default.data_sources]
+damm_base_url = "https://dammv2-api.meteora.ag"
+damm_devnet_base_url = "https://dammv2-api.devnet.meteora.ag"
+damm_pool_endpoint = "/pools"
+damm_page_limit = 50
+dlmm_base_url = "https://dlmm-api.meteora.ag"
+dlmm_devnet_base_url = "https://devnet-dlmm-api.meteora.ag"
+dlmm_pool_endpoint = "/pair/all"
+dlmm_page_limit = 50
+price_oracle_url = "https://lite-api.jup.ag/"
+
+[default.router]
+liquidity_weight = 0.45
+fee_weight = 0.2
+volatility_weight = 0.15
+slippage_safety_bps = 40
+
+[default.execution]
+queue_capacity = 128
+max_concurrency = 4
+retry_backoff_seconds = 0.75
+max_retry_attempts = 3
+jitter_seconds = 0.25
+batch_size = 4
+
+[default.pnl]
+mark_price_source = "oracle"
+oracle_staleness_seconds = 45
+
+[default.risk]
+max_global_notional_usd = 150000.0
+max_market_notional_usd = 25000.0
+max_position_notional_usd = 10000.0
+max_inventory_pct = 0.3
+max_open_orders = 25
+
+[default.circuit_breakers]
+max_drawdown_pct = 0.2
+max_reject_rate = 0.15
+cooldown_seconds = 300
+
+[default.event_bus]
+enabled = true
+max_queue_size = 2048
+publish_metrics = true
+
+[default.dashboard]
+host = "0.0.0.0"
+port = 8080
+auth_mode = "read_only"
+metrics_refresh_interval_seconds = 5
+allowed_origins = ["*"]
+
+[default.storage]
+database_path = "./state.sqlite3"
+metrics_snapshot_path = "./metrics_snapshots"
+
+[default.monitoring]
+log_level = "INFO"
+enable_prometheus = true
+metrics_port = 9100
+webhook_urls = []
+alert_throttle_seconds = 60
+
+[dry_run]
+# Dry run overrides for safe testing
+
+[dry_run.mode]
+active = "dry_run"
+cluster = "mainnet-beta"
+persist_dry_run_state = true
+
+[dry_run.rpc]
+primary_url = "https://api.mainnet-beta.solana.com"
+fallback_urls = ["https://solana-api.projectserum.com"]
+commitment = "confirmed"
+
+[dry_run.token_universe]
+require_oracle_price = false
+min_liquidity_usd = 15000.0
+min_volume_24h_usd = 40000.0
+
+[dry_run.strategy]
+fixed_allocation_usd = 10.0
+
+[live]
+# Live trading overrides
+
+[live.mode]
+active = "live"
+cluster = "mainnet-beta"
+
+[live.wallet]
+allow_test_keypair = false
+
+[live.router]
+slippage_safety_bps = 30
+prefer_maker_routes = true
+
+[live.execution]
+queue_capacity = 160
+max_concurrency = 6
+retry_backoff_seconds = 1.0
+max_retry_attempts = 5
+jitter_seconds = 0.35
+batch_size = 6
+
+[live.risk]
+daily_loss_limit_usd = 5000.0
+max_inventory_pct = 0.25
+
+[testnet]
+# Optional testnet configuration for semi-live rehearsals
+
+[testnet.mode]
+active = "testnet"
+cluster = "testnet"
+
+[testnet.rpc]
+primary_url = "https://api.testnet.solana.com"
+commitment = "confirmed"
+
+[testnet.execution]
+queue_capacity = 64
+max_concurrency = 2
+retry_backoff_seconds = 0.6
+max_retry_attempts = 3
+jitter_seconds = 0.2
+batch_size = 2
